@@ -1,0 +1,247 @@
+﻿<Window x:Class="SiBerlo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        Background="{DynamicResource MaterialDesignPaper}"
+        WindowState="Maximized">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Material Design Sidebar -->
+        <Border Grid.Column="0" Background="{StaticResource SidebarBackground}">
+            <StackPanel Margin="16 8">
+                <!-- Header -->
+                <StackPanel Margin="0 0 0 16">
+                    <TextBlock Text="Farnadi Síparadicsom"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="{StaticResource SidebarForeground}"/>
+                </StackPanel>
+                
+                <!-- Adminisztráció -->
+                <Expander Style="{StaticResource MaterialDesignExpander}">
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="AccountDetails" 
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0 0 12 0"
+                                    VerticalAlignment="Center"/>
+                            <TextBlock Text="Adminisztráció" 
+                                   VerticalAlignment="Center"
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </Expander.Header>
+                    
+                    <StackPanel>
+                        <Button Command="{Binding NavigateCommand}"
+                                CommandParameter="AlkalmazottakView"
+                                Style="{StaticResource MaterialSidebarButton}">
+                            <StackPanel Orientation="Horizontal" Margin="16 0 0 0">
+                                <materialDesign:PackIcon Kind="AccountGroup" 
+                                                       Width="20"
+                                                       Height="20"
+                                                       Margin="0 0 12 0"
+                                                       VerticalAlignment="Center"/>
+                                <TextBlock Text="Alkalmazottak" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding NavigateCommand}"
+                                CommandParameter="UgyfelekView"
+                                Style="{StaticResource MaterialSidebarButton}">
+                            <StackPanel Orientation="Horizontal" Margin="16 0 0 0">
+                                <materialDesign:PackIcon Kind="Account" 
+                                                       Width="20"
+                                                       Height="20"
+                                                       Margin="0 0 12 0"
+                                                       VerticalAlignment="Center"/>
+                                <TextBlock Text="Ügyfelek" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding NavigateCommand}"
+                                CommandParameter="BejelentkezesekView"
+                                Style="{StaticResource MaterialSidebarButton}">
+                            <StackPanel Orientation="Horizontal" Margin="16 0 0 0">
+                                <materialDesign:PackIcon Kind="Login" 
+                               Width="20"
+                               Height="20"
+                               Margin="0 0 12 0"
+                               VerticalAlignment="Center"/>
+                                <TextBlock Text="Bejelentkezések" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding NavigateCommand}"
+                                CommandParameter="BerperiodusokView"
+                                Style="{StaticResource MaterialSidebarButton}">
+                            <StackPanel Orientation="Horizontal" Margin="16 0 0 0">
+                                <materialDesign:PackIcon Kind="CalendarMultiple" 
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0 0 12 0"
+                                    VerticalAlignment="Center"/>
+                                <TextBlock Text="Bérperiódusok" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding NavigateCommand}"
+                                CommandParameter="BerekView"
+                                Style="{StaticResource MaterialSidebarButton}">
+                            <StackPanel Orientation="Horizontal" Margin="16 0 0 0">
+                                <materialDesign:PackIcon Kind="AccountCash" 
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0 0 12 0"
+                                    VerticalAlignment="Center"/>
+                                <TextBlock Text="Bérek" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Expander>
+
+                <!-- Raktárkezelés -->
+                <Expander Style="{StaticResource MaterialDesignExpander}">
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Warehouse" 
+                                                    Width="20"
+                                                    Height="20"
+                                                    Margin="0 0 12 0"
+                                                    VerticalAlignment="Center"/>
+                            <TextBlock Text="Raktárkezelés" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"/>
+                        </StackPanel>
+                    </Expander.Header>
+
+                    <StackPanel>
+                        <Button Command="{Binding NavigateCommand}"
+                                CommandParameter="FelszerelesView"
+                                Style="{StaticResource MaterialSidebarButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Snowboard" 
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0 0 12 0"
+                                    VerticalAlignment="Center"/>
+                                <TextBlock Text="Felszerelés" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding NavigateCommand}"
+                                CommandParameter="FelszerelesView"
+                                Style="{StaticResource MaterialSidebarButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Dresser" 
+                                                        Width="20"
+                                                        Height="20"
+                                                        Margin="0 0 12 0"
+                                                        VerticalAlignment="Center"/>
+                                <TextBlock Text="Készletnyilvántartás" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Expander>
+                
+                <!-- Jelentések -->
+                <Expander Style="{StaticResource MaterialDesignExpander}">
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Finance" 
+                                                    Width="20"
+                                                    Height="20"
+                                                    Margin="0 0 12 0"
+                                                    VerticalAlignment="Center"/>
+                            <TextBlock Text="Jelentések" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"/>
+                        </StackPanel>
+                    </Expander.Header>
+
+                    <StackPanel>
+                        <Button Command="{Binding NavigateCommand}"
+                                CommandParameter="JelentesekView"
+                                Style="{StaticResource MaterialSidebarButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="ChartArc" 
+                                Width="20"
+                                Height="20"
+                                Margin="0 0 12 0"
+                                VerticalAlignment="Center"/>
+                                <TextBlock Text="Jelentések" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Expander>
+
+                <!-- Ügyfélszolgálat -->
+                <Expander Style="{StaticResource MaterialDesignExpander}">
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FaceAgent" 
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0 0 12 0"
+                                    VerticalAlignment="Center"/>
+                            <TextBlock Text="Ügyfélszolgálat" 
+                       VerticalAlignment="Center"
+                       FontSize="14"/>
+                        </StackPanel>
+                    </Expander.Header>
+
+                    <StackPanel>
+                        <Button Command="{Binding NavigateCommand}"
+                                 CommandParameter="BerlesekView"
+                                 Style="{StaticResource MaterialSidebarButton}">
+                            <StackPanel Orientation="Horizontal" Margin="16 0 0 0">
+                                <materialDesign:PackIcon Kind="Cash" 
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0 0 12 0"
+                                    VerticalAlignment="Center"/>
+                                <TextBlock Text="Bérlések" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </Border>
+
+        
+        <ContentControl Grid.Column="1"
+                Content="{Binding CurrentView}"
+                Background="{DynamicResource MaterialDesignPaper}">
+            <ContentControl.Resources>
+                <DataTemplate x:Key="EmptyContentTemplate">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Menu" 
+                                         Width="48"
+                                         Height="48"
+                                         Foreground="{DynamicResource MaterialDesignBody}"
+                                         Opacity="0.3"/>
+                        <TextBlock Text="Üdv, válassz egy menü opciót" 
+                           FontSize="16"
+                           Margin="0 8 0 0"
+                           Foreground="{DynamicResource MaterialDesignBody}"
+                           Opacity="0.6"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ContentControl.Resources>
+
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CurrentView}" Value="{x:Null}">
+                            <Setter Property="ContentTemplate" Value="{StaticResource EmptyContentTemplate}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
+    </Grid>
+</Window>

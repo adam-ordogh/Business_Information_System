@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="SiBerlo.Views.BerekView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SiBerlo.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" 
+        CornerRadius="4" 
+        Padding="16" 
+        Background="{DynamicResource MaterialDesignPaper}"
+        Margin="0 0 0 16">
+            <StackPanel>
+                <TextBlock Text="{Binding FormTitle}" 
+                   Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                   Margin="0 0 0 16"/>
+
+                <ComboBox materialDesign:HintAssist.Hint="Periódus"
+                          ItemsSource="{Binding Berperiodusok}"
+                            DisplayMemberPath="Nev"
+                          SelectedItem="{Binding SelectedBerperiodus, UpdateSourceTrigger=PropertyChanged}"
+                          Margin="0 0 0 8"/>
+            </StackPanel>
+        </Border>        
+        
+        <DataGrid Grid.Row="2" 
+            ItemsSource="{Binding BerekPerBerperiodusok}"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            SelectionMode="Single"
+            SelectedItem="{Binding SelectedBer}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Alkalmazott" Binding="{Binding AlkalmazottNev}"/>
+                <DataGridTextColumn Header="Alapbér" Binding="{Binding Alapber, StringFormat=N2}"/>
+                <DataGridTextColumn Header="Tulóra bér" Binding="{Binding TuloraBer, StringFormat=N2}"/>
+                <DataGridTextColumn Header="Hétvégi bónusz" Binding="{Binding HetvegiBonusz, StringFormat=N2}"/>
+                <DataGridTextColumn Header="Jutalék" Binding="{Binding Jutalek, StringFormat=N2}"/>
+                <DataGridTextColumn Header="Egyéb pótlék" Binding="{Binding EgyebPotlek, StringFormat=N2}"/>
+                <DataGridTextColumn Header="Előleg" Binding="{Binding Eloleg, StringFormat=N2}"/>
+                <DataGridTextColumn Header="SZOCHO" Binding="{Binding Szocho, StringFormat=N2}"/>
+                <DataGridTextColumn Header="SZJA" Binding="{Binding Szja, StringFormat=N2}"/>
+                <DataGridTextColumn Header="Nettó bér" Binding="{Binding NettoBer, StringFormat=N2}"/>
+
+                <!-- Add Edit button column -->
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Szerkesztés" 
+                                    Command="{Binding DataContext.EditWageCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                    CommandParameter="{Binding}"
+                                    Margin="2"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

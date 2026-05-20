@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="SiBerlo.Views.BerlesekView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SiBerlo.Views"             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Rental Form -->
+        <Border Grid.Row="0" 
+                CornerRadius="4" 
+                Padding="16" 
+                Background="{DynamicResource MaterialDesignPaper}"
+                Margin="0 0 0 16">
+            <StackPanel>
+                <TextBlock Text="{Binding FormTitle}" 
+                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                           Margin="0 0 0 16"/>
+
+                <!-- Rental Period -->
+                <DatePicker materialDesign:HintAssist.Hint="Bérlés kezdete"
+                            SelectedDate="{Binding RentalStartDate, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="0 0 0 8"/>
+
+                <DatePicker materialDesign:HintAssist.Hint="Bérlés vége"
+                            SelectedDate="{Binding RentalEndDate, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="0 0 0 8"/>
+                <!-- Customer Selection -->
+                <ComboBox materialDesign:HintAssist.Hint="Ügyfél"
+                          ItemsSource="{Binding Customers}"
+                          SelectedValuePath="Id"  
+                          SelectedValue="{Binding SelectedCustomerId, UpdateSourceTrigger=PropertyChanged}"
+                          Margin="0 0 0 8"/>
+
+                <!-- Equipment Type Selection -->
+                <ComboBox materialDesign:HintAssist.Hint="Felszerelés típus"
+                          ItemsSource="{Binding EquipmentTypes}"
+                          SelectedItem="{Binding SelectedEquipmentType, UpdateSourceTrigger=PropertyChanged}"
+                          IsEnabled="{Binding CanSelectEquipment}"
+                          Margin="0 0 0 8"/>
+
+                <!-- Available Equipment Selection -->
+                <ComboBox materialDesign:HintAssist.Hint="Elérhető felszerelés"
+                          ItemsSource="{Binding Equipment}"
+                          SelectedValuePath="Id"    
+                          SelectedValue="{Binding SelectedEquipmentId, UpdateSourceTrigger=PropertyChanged}"
+                          IsEnabled="{Binding CanSelectEquipment}"
+                          Margin="0 0 0 8"/>                
+
+                <!-- Rental Calculation -->
+                <Border Margin="0 0 0 8" 
+                        Padding="8" 
+                        Background="{DynamicResource MaterialDesignPaper}"
+                        CornerRadius="4"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}"
+                        BorderThickness="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Fizetendő összeg:" 
+                                   VerticalAlignment="Center"
+                                   Margin="0 0 8 0"/>
+                        <TextBlock Grid.Column="1" 
+                                   Text="{Binding TotalAmountToPay, StringFormat={}{0}}"
+                                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                   HorizontalAlignment="Left"/>
+                    </Grid>
+                </Border>
+
+                <!-- Action Buttons -->
+                <Button Content="Bérlés létrehozása" 
+                        Command="{Binding AddRentalCommand}"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource MaterialDesignRaisedButton}"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                    <Button Content="Frissítés"
+                            Command="{Binding UpdateRentalCommand}"
+                            Style="{StaticResource MaterialDesignRaisedButton}" />
+                    <Button Content="Törlés"
+                            Command="{Binding DeleteRentalCommand}"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Background="Tomato"
+                            Foreground="White"/>
+                    <Button Content="Mégse"
+                            Command="{Binding CancelEditCommand}"
+                            Style="{StaticResource MaterialDesignRaisedButton}" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <!-- Bérlések -->
+        <TextBlock Grid.Row="1" 
+                   Text="Felszerelések listája" 
+                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                   Margin="0 0 0 8"/>
+
+        <DataGrid Grid.Row="2" 
+                  ItemsSource="{Binding Rentals}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding SelectedRental}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Ügyfél ID" Binding="{Binding UgyfelId}"/>
+                <DataGridTextColumn Header="Felszerelés ID" Binding="{Binding FelszerelesId}"/>
+                <DataGridTextColumn Header="Kezdő dátum" Binding="{Binding KezdoDatum}"/>
+                <DataGridTextColumn Header="Vég dátum" Binding="{Binding VegDatum}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

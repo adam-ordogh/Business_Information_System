@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="SiBerlo.Views.BejelentkezesekView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SiBerlo.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" 
+                CornerRadius="4" 
+                Padding="16" 
+                Background="{DynamicResource MaterialDesignPaper}"
+                Margin="0 0 0 16">
+            <StackPanel>
+                <TextBlock Text="Alkalmazottak érkezése és távozása" 
+                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                           Margin="0 0 0 16"/>
+                <ComboBox materialDesign:HintAssist.Hint="Alkalmazott"
+                          ItemsSource="{Binding Employees}"
+                          SelectedItem="{Binding SelectedEmployee, UpdateSourceTrigger=PropertyChanged}"
+                          Margin="0 0 0 8"/>
+                <Button Content="{Binding ArrivedOrLeft}" 
+                        Command="{Binding CheckinOrOutCommand}"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource MaterialDesignRaisedButton}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
